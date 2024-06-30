@@ -1,17 +1,19 @@
 "use client";
-import { useWalletInfo } from "@web3modal/wagmi/react";
-import Image from "next/image";
+import { chain, client } from "@/utils/constants";
+import { ConnectButton } from "thirdweb/react";
+import { createWallet, inAppWallet } from "thirdweb/wallets";
 
-export default function ConnectButton() {
-  const { walletInfo } = useWalletInfo();
+const wallets = [
+  inAppWallet(),
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  createWallet("me.rainbow"),
+];
+
+export default function ConnectWalletBtn() {
   return (
     <div className="flex items-center">
-      {walletInfo?.icon && (
-        <div className="relative w-6 h-6">
-          <Image alt="icon" src={walletInfo.icon} fill />
-        </div>
-      )}
-      <w3m-button size="md" balance="hide" />
+      <ConnectButton wallets={wallets} client={client} chain={chain} />
     </div>
   );
 }

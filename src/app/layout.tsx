@@ -1,10 +1,8 @@
+import Web3ModalProvider from "@/web3/Web3Provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import ConnectWalletBtn from "./components/ConnectWalletBtn";
 import "./globals.css";
-import Web3ModalProvider from "@/web3/Web3Provider";
-import { cookieToInitialState } from "wagmi";
-import { config } from "@/config";
-import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +16,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"));
-
   return (
     <html lang="en">
-      <Web3ModalProvider initialState={initialState}>
-        <body className={inter.className}>{children}</body>
+      <Web3ModalProvider>
+        <body className={inter.className}>
+          <nav className="p-4 fixed top-0 w-full flex justify-end">
+            <ConnectWalletBtn />
+          </nav>
+          <div className="flex flex-col min-h-screen justify-center items-center">
+            <h1 className="text-4xl font-semibold">Web3 Counter</h1>
+            {children}
+          </div>
+        </body>
       </Web3ModalProvider>
     </html>
   );
