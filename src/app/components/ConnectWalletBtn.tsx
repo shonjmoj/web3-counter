@@ -1,10 +1,9 @@
 "use client";
 import { chain, client } from "@/utils/constants";
 import { ConnectButton } from "thirdweb/react";
-import { createWallet, inAppWallet } from "thirdweb/wallets";
+import { createWallet } from "thirdweb/wallets";
 
 const wallets = [
-  inAppWallet(),
   createWallet("io.metamask"),
   createWallet("com.coinbase.wallet"),
   createWallet("me.rainbow"),

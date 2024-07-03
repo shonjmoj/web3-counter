@@ -1,5 +1,5 @@
 import ConnectButton from "./components/ConnectWalletBtn";
-import Contract from "./components/Contract";
+import Contract from "./components/Counter";
 
 export default function Home() {
   return (
